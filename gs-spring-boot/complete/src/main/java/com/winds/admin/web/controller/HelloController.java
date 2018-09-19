@@ -23,12 +23,6 @@ public class HelloController {
         return "Greetings from Spring Boot!";
     }
     
-    @RequestMapping("/search")
-    @ResponseBody
-    public String search() {
-        return "please to search";
-    }
-    
     @RequestMapping("/login")
     @ResponseBody
     public String login(HttpServletRequest request,HttpServletResponse response,String data) {
