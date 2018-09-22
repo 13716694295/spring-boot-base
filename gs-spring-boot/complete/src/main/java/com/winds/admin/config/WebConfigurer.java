@@ -12,7 +12,7 @@ import com.winds.admin.config.interceptors.LoginInterceptor;
 * @author   :WindsJune/博客园：WindsJune
 * @version  :1.1.0
 * @date     :2018年9月19日 上午9:36:16
-* @comments :登录拦截器
+* @comments :注册拦截器，拦截请求类型
 */
 
 @Configuration

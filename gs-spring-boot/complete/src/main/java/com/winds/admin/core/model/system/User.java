@@ -1,4 +1,6 @@
-package com.winds.admin.model.login;
+package com.winds.admin.core.model.system;
+
+import java.util.Date;
 
 /**
 * @author   :WindsJune/博客园：WindsJune
@@ -13,9 +15,11 @@ public class User {
 	
 	private String userName;
 	
-	private String userPass;
+	private String passWord;
 	
 	private String userCode;
+	
+	private Date createTime;
 	
 	private String comments;
 
@@ -27,12 +31,12 @@ public class User {
 		this.userName = userName;
 	}
 
-	public String getUserPass() {
-		return userPass;
+	public String getPassWord() {
+		return passWord;
 	}
 
-	public void setUserPass(String userPass) {
-		this.userPass = userPass;
+	public void setPassWord(String passWord) {
+		this.passWord = passWord;
 	}
 
 	public String getUserCode() {
@@ -58,13 +62,19 @@ public class User {
 	public void setSessionId(String sessionId) {
 		this.sessionId = sessionId;
 	}
+	
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
 
 	@Override
 	public String toString() {
-		return "User [sessionId=" + sessionId + ", userName=" + userName + ", userPass=" + userPass + ", userCode="
-				+ userCode + ", comments=" + comments + "]";
+		return "User [sessionId=" + sessionId + ", userName=" + userName + ", passWord=" + passWord + ", userCode="
+				+ userCode + ", createTime=" + createTime + ", comments=" + comments + "]";
 	}
-	
-	
-	
+
 }

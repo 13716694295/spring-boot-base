@@ -4,12 +4,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.winds.admin.model.login.User;
+import com.winds.admin.core.model.system.User;
 
 /**
 * @author   :WindsJune/博客园：WindsJune
@@ -21,12 +24,18 @@ import com.winds.admin.model.login.User;
 @Component
 public class LoginInterceptor implements HandlerInterceptor{
 	
+	private static final Logger LOGGER=LoggerFactory.getLogger(HandlerInterceptor.class);
+	
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		HttpSession session=request.getSession();
-		User user=(User) session.getAttribute("user");
-		if (user == null) {
+		User user=(User) session.getAttribute(session.getId());
+		if (user != null && StringUtils.equals(user.getSessionId(), session.getId())) {
+            LOGGER.info("恭喜：["+user.getUserName()+"] 登录成功！登录信息："+user.toString());
+			String url = "/index";
+            response.sendRedirect(url);
+		}else {
 			String url = "/login";
             response.sendRedirect(url);
             return false;
@@ -37,11 +46,13 @@ public class LoginInterceptor implements HandlerInterceptor{
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			@Nullable ModelAndView modelAndView) throws Exception {
+		System.out.println("postHandle");
 	}
 	
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler,
 			@Nullable Exception ex) throws Exception {
+		System.out.println("afterCompletion");
 	}
 	
 }
